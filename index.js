@@ -19,10 +19,8 @@ app.listen(process.env.PORT||3000,()=>{
 })
 
 
-client.connect();
-
-
 app.get('/logs',(req,res)=>{
+    client.connect();
     client.query(`SELECT * FROM logs`)
         .then(result => res.send(result.rows))
         .catch(e => {
@@ -34,6 +32,7 @@ app.get('/logs',(req,res)=>{
 
 
 app.get('/logs/:id',(req,res)=>{
+    client.connect();
     client.query(`SELECT * FROM logs where id=${req.params.id}`)
         .then(result => res.send(result.rows))
         .catch(e => {
@@ -44,7 +43,7 @@ app.get('/logs/:id',(req,res)=>{
 })
 
 app.post('/logs',(req,res)=>{
-
+    client.connect();
     const log=req.body;
 
     let insertQuery=`INSERT INTO public.logs(logname)
@@ -62,6 +61,7 @@ app.post('/logs',(req,res)=>{
 
 
 app.put('/logs/:id', (req, res)=> {
+    client.connect();
     let log = req.body;
     let updateQuery = `update public.logs
                        set logname = '${log.logname}'
@@ -78,6 +78,7 @@ app.put('/logs/:id', (req, res)=> {
 
 
 app.delete('/logs/:id', (req, res)=> {
+    client.connect();
     let deleteQuery = `delete from public.logs where id=${req.params.id}`
     
     client.query(deleteQuery)
