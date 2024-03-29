@@ -2,12 +2,12 @@ require('dotenv').config();
 const {Client} = require('pg')
 
 const client=new Client({
-    host: process.env.RENDER_HOST,
-    user:process.env.RENDER_USER,
-    port:process.env.RENDER_PORT,
-    password:process.env.RENDER_PASSWORD,
-    database:process.env.RENDER_DATABASE,
-   // ssl: true //only for external
+    host: process.env.NEON_HOST,
+    user:process.env.NEON_USER,
+    port:process.env.NEON_PORT,
+    password:process.env.NEON_PASSWORD,
+    database:process.env.NEON_DATABASE,
+    ssl: true //only for external
 })
 
 module.exports=client
